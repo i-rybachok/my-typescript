@@ -1,0 +1,27 @@
+.banner {
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 2.75em;
+  margin-bottom: 30px;
+}
+
+.text {
+  color: var(--c-black-secondary);
+  font-size: 1.125em;
+  line-height: 1.75em;
+  margin-bottom: 20px;
+}
