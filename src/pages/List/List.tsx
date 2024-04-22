@@ -10,6 +10,12 @@ import Wrapper from '../../components/Wrapper/Wrapper';
 // * Styles
 import styles from './List.module.css';
 
+// * Local types
+type TProps = {
+  title: string;
+  body: string;
+};
+
 const List = () => {
   const [state, setState] = useState({ list: [], error: '', loading: true });
   const commonId = useId(); // Create a unique id
@@ -64,7 +70,7 @@ const List = () => {
   );
 };
 
-const Item = ({ title, body }) => {
+const Item: React.FC<TProps> = ({ title, body }) => {
   return (
     <li>
       <h3>{title}</h3>

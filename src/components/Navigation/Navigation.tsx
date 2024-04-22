@@ -7,6 +7,12 @@ import { Link } from 'react-router-dom';
 // * Styles
 import styles from './Navigation.module.css';
 
+// * Local types
+type TProps = {
+  href: string;
+  text: string;
+};
+
 const Navigation = () => {
   return (
     <nav>
@@ -19,7 +25,7 @@ const Navigation = () => {
   );
 };
 
-const Item = ({ href, text }) => {
+const Item: React.FC<TProps> = ({ href, text }) => {
   return (
     <li>
       <Link to={href} className={styles.link}>

@@ -5,9 +5,21 @@ import cn from 'classnames';
 // * Styles
 import styles from './Button.module.css';
 
-const Button = ({
+// * Types
+import { EButton } from '../types/Button.types';
+
+// * Local types
+type TProps = {
+  type: EButton;
+  onClick?: () => void;
+  text: string;
+  whiteMode?: boolean;
+  bigMode?: boolean;
+};
+
+const Button: React.FC<TProps> = ({
   text = 'Default',
-  type = 'button',
+  type,
   whiteMode,
   bigMode,
   onClick,

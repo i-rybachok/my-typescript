@@ -7,9 +7,10 @@ import Wrapper from '../Wrapper/Wrapper';
 import Navigation from '../Navigation/Navigation';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
-// import logo from '../assets/logo.png';
+
 // * Styles
 import styles from './Header.module.css';
+import { EButton } from '../types/Button.types';
 
 const Header = memo(() => {
   const signIn = useCallback(() => console.log('You signed in'), []);
@@ -24,8 +25,13 @@ const Header = memo(() => {
         </Link>
         <Navigation />
         <div className={styles.buttons}>
-          <Button text='Sign In' callback={signIn} whiteMode={true} />
-          <Button text='Sign Up' callback={signUp} />
+          <Button
+            type={EButton.BUTTON}
+            text='Sign In'
+            onClick={signIn}
+            whiteMode={true}
+          />
+          <Button type={EButton.BUTTON} text='Sign Up' onClick={signUp} />
         </div>
       </Wrapper>
     </header>

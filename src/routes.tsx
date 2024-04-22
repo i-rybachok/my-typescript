@@ -1,6 +1,6 @@
 // * Base
 import { createBrowserRouter } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { ReactNode, Suspense, lazy } from 'react';
 
 // * Components
 import App from './App';
@@ -11,7 +11,7 @@ const List = lazy(() => import('./pages/List/List'));
 const SignUp = lazy(() => import('./pages/SignUp/SignUp'));
 const Error = lazy(() => import('./components/Error/Error'));
 
-const Element = ({ page }) => {
+const Element = ({ page }: { page: ReactNode }) => {
   return <Suspense fallback={<Loading />}>{page}</Suspense>;
 };
 
@@ -34,7 +34,7 @@ const routes = createBrowserRouter([
       },
       {
         path: '*',
-        element: <Element page={<Error />} />,
+        element: <Element page={<Error error='Error' />} />,
       },
     ],
   },

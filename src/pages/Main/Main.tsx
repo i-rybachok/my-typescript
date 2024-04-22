@@ -8,9 +8,10 @@ import Wrapper from '../../components/Wrapper/Wrapper';
 
 // * Styles
 import styles from './Main.module.css';
+import { EButton } from '../../components/types/Button.types';
 
 const Banner = () => {
-  const [count, setCount] = useState(0); // "useState(0)" is an example of a hook; in [number, setNumber] "number" is a state variable and "setNumber" is the setter function
+  const [count, setCount] = useState<number>(0); // "useState(0)" is an example of a hook; in [number, setNumber] "number" is a state variable and "setNumber" is the setter function
 
   return (
     <Wrapper>
@@ -22,13 +23,14 @@ const Banner = () => {
             The most intuitive way to imagine your next user experience.
           </p>
           <Button
-            text="Add 1 to a number"
+            type={EButton.BUTTON}
+            text='Add 1 to a number'
             onClick={() => setCount((prev) => prev + 1)}
             bigMode={true}
           />
           <div>{count}</div>
         </section>
-        <img src={img} alt="people" />
+        <img src={img} alt='people' />
       </div>
     </Wrapper>
   );

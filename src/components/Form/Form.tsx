@@ -1,13 +1,21 @@
-import { Formik } from 'formik';
+import { Formik, FormikValues } from 'formik';
 import Input from '../Input/Input';
 
-const INITIAL_VALUES = { username: '', email: '', password: '' };
-const EMAIL_REG_EXP = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-const PASSWORD_MIN_LENGTH = 8;
+// * Local Types
+
+type TValues = {
+  username: string;
+  email: string;
+  password: string;
+};
+
+const INITIAL_VALUES: TValues = { username: '', email: '', password: '' };
+const EMAIL_REG_EXP: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+const PASSWORD_MIN_LENGTH: number = 8;
 
 const Form = () => {
-  const validators = ({ username, email, password }) => {
-    const errors = {};
+  const validators = ({ username, email, password }: Readonly<TValues>) => {
+    const errors: Partial<TValues> = {};
 
     if (!username) {
       errors.username = 'Required';
@@ -28,7 +36,10 @@ const Form = () => {
     return errors;
   };
 
-  const onSubmit = (values, { setSubmitting, resetForm }) => {
+  const onSubmit = (
+    values: TValues,
+    { setSubmitting, resetForm }: FormikValues
+  ) => {
     console.log('values: ', values);
     setTimeout(() => {
       setSubmitting(false);
