@@ -1,0 +1,17 @@
+.list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.link {
+  color: var(--c-black);
+  /* Use padding instead of gap for better UX (expanding hover field) */
+  padding: 10px;
+  display: flex;
+  transition: all 0.35s ease-in-out;
+}
+
+.link:hover {
+  color: var(--c-primary);
+}

@@ -1,0 +1,27 @@
+.header {
+  background-color: var(--c-white);
+  /* position: fixed;
+  top: 0;
+  right: 0;
+  left: 0; */
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.logo {
+  max-width: 200px;
+  color: var(--c-dark-blue);
+  font-size: 100px;
+}
+
+.buttons {
+  display: flex;
+  gap: 30px;
+}
