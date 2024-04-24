@@ -1,5 +1,5 @@
 // * Base
-import { Formik, FormikValues } from 'formik';
+import { FormikValues, useFormik } from 'formik';
 
 // * Components
 import Input from '../Input/Input';
@@ -18,7 +18,8 @@ const EMAIL_REG_EXP: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PASSWORD_MIN_LENGTH: number = 8;
 
 const Form = () => {
-  const validators = ({ username, email, password }: Readonly<TValues>) => {
+  // Check all inputs (validate them)
+  const validate = ({ username, email, password }: Readonly<TValues>) => {
     const errors: Partial<TValues> = {};
 
     if (!username) {
@@ -40,76 +41,74 @@ const Form = () => {
     return errors;
   };
 
-  const onSubmit = (
-    values: TValues,
-    { setSubmitting, resetForm }: FormikValues
-  ) => {
-    console.log('values: ', values);
-    setTimeout(() => {
-      setSubmitting(false);
-      resetForm();
-    }, 2000);
-  };
+  // ! useFormik for ...
+  const formik = useFormik({
+    // Pass initialValues
+    initialValues: INITIAL_VALUES,
+    // Validation
+    validate,
+    // What we do on submit:
+    onSubmit: (values: TValues, { setSubmitting, resetForm }: FormikValues) => {
+      console.log('values: ', values);
+      setTimeout(() => {
+        setSubmitting(false);
+        resetForm();
+      }, 2000);
+    },
+  });
 
   return (
-    <Formik
-      preventDefault
-      initialValues={INITIAL_VALUES}
-      validate={validators}
-      onSubmit={onSubmit}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }) => (
-        <form onSubmit={handleSubmit} className='max-w-sm mx-auto'>
-          <Input
-            title='Username'
-            type='username'
-            name='username'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.username}
-            placeholder='Username'
-            error={errors.username && touched.username && errors.username}
-          />
+    <form onSubmit={formik.handleSubmit} className='max-w-sm mx-auto'>
+      <Input
+        title='Username'
+        type='username'
+        name='username'
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.username}
+        placeholder='Username'
+        error={
+          formik.errors.username &&
+          formik.touched.username &&
+          formik.errors.username
+        }
+      />
 
-          <Input
-            title='Email'
-            type='email'
-            name='email'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-            placeholder='Email'
-            error={errors.email && touched.email && errors.email}
-          />
+      <Input
+        title='Email'
+        type='email'
+        name='email'
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.email}
+        placeholder='Email'
+        error={
+          formik.errors.email && formik.touched.email && formik.errors.email
+        }
+      />
 
-          <Input
-            title='Password'
-            type='password'
-            name='password'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-            placeholder='Password'
-            error={errors.password && touched.password && errors.password}
-          />
+      <Input
+        title='Password'
+        type='password'
+        name='password'
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.password}
+        placeholder='Password'
+        error={
+          formik.errors.password &&
+          formik.touched.password &&
+          formik.errors.password
+        }
+      />
 
-          <Button
-            type={EButton.SUBMIT}
-            text='Submit'
-            disabled={isSubmitting}
-            orangeMode
-          />
-        </form>
-      )}
-    </Formik>
+      <Button
+        type={EButton.SUBMIT}
+        text='Submit'
+        disabled={formik.isSubmitting}
+        orangeMode
+      />
+    </form>
   );
 };
 
