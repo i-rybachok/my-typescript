@@ -13,25 +13,31 @@ type TProps = {
   type: EButton;
   onClick?: () => void;
   text: string;
+  disabled?: boolean;
   whiteMode?: boolean;
   bigMode?: boolean;
+  orangeMode?: boolean;
 };
 
 const Button: React.FC<TProps> = ({
-  text = 'Default',
   type,
+  onClick,
+  text = 'Default',
+  disabled,
   whiteMode,
   bigMode,
-  onClick,
+  orangeMode,
 }) => {
   return (
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={cn(
         styles.button,
         whiteMode && styles.white,
-        bigMode && styles.big
+        bigMode && styles.big,
+        orangeMode && styles.orange
       )}
     >
       <span>{text}</span>

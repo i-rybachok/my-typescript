@@ -3,6 +3,8 @@ import { Formik, FormikValues } from 'formik';
 
 // * Components
 import Input from '../Input/Input';
+import Button from '../Button/Button';
+import { EButton } from '../types/Button.types';
 
 // * Local Types
 type TValues = {
@@ -99,13 +101,12 @@ const Form = () => {
             error={errors.password && touched.password && errors.password}
           />
 
-          <button
-            type='submit'
+          <Button
+            type={EButton.SUBMIT}
+            text='Submit'
             disabled={isSubmitting}
-            className='text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 disabled:cursor-not-allowed disabled:from-gray-400 disabled:to-gray-700 transition duration-150 ease-in-out font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-5'
-          >
-            <span>Submit</span>
-          </button>
+            orangeMode
+          />
         </form>
       )}
     </Formik>
