@@ -1,8 +1,10 @@
+// * Base
 import { Formik, FormikValues } from 'formik';
+
+// * Components
 import Input from '../Input/Input';
 
 // * Local Types
-
 type TValues = {
   username: string;
   email: string;
@@ -63,7 +65,7 @@ const Form = () => {
         handleSubmit,
         isSubmitting,
       }) => (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='max-w-sm mx-auto'>
           <Input
             title='Username'
             type='username'
@@ -71,8 +73,9 @@ const Form = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.username}
+            placeholder='Username'
+            error={errors.username && touched.username && errors.username}
           />
-          <div>{errors.username && touched.username && errors.username}</div>
 
           <Input
             title='Email'
@@ -81,8 +84,9 @@ const Form = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}
+            placeholder='Email'
+            error={errors.email && touched.email && errors.email}
           />
-          <div>{errors.email && touched.email && errors.email}</div>
 
           <Input
             title='Password'
@@ -91,10 +95,15 @@ const Form = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
+            placeholder='Password'
+            error={errors.password && touched.password && errors.password}
           />
-          <div>{errors.password && touched.password && errors.password}</div>
 
-          <button type='submit' disabled={isSubmitting}>
+          <button
+            type='submit'
+            disabled={isSubmitting}
+            className='text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 disabled:cursor-not-allowed disabled:from-gray-400 disabled:to-gray-700 transition duration-150 ease-in-out font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-5'
+          >
             <span>Submit</span>
           </button>
         </form>

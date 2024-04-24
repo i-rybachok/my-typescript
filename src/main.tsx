@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
 // * Styles
-import './styles/normalize.css';
 import './styles/index.css';
 
 // * Routes
