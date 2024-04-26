@@ -8,9 +8,6 @@ import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
 import Wrapper from '../Wrapper/Wrapper';
 
-// * Custom hooks
-import useTitle from '../../hooks/useTitle.hook';
-
 // * Styles
 import styles from './List.module.css';
 
@@ -24,8 +21,6 @@ type TProps = {
 const URL: string = 'https://jsonplaceholder.typicode.com/posts';
 
 const List = () => {
-  useTitle({ title: 'List' });
-
   const [state, setState] = useState({ list: [], error: '', loading: true });
   const commonId = useId(); // Create a unique id
 

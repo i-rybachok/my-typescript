@@ -17,12 +17,10 @@ import useTitle from '../../../hooks/useTitle.hook';
 const URL: string = 'https://jsonplaceholder.typicode.com/posts';
 
 const getDetail = () => {
-  // ! Як написати сюди id ?
-  // useTitle({ title: {idTitle} });
-
   const [data, setData] = useState<TData | null>(null);
   const [error, setError] = useState(false);
   const { id } = useParams();
+  useTitle({ title: data?.title || 'Loading' });
 
   const getListDetail = () => {
     axios
@@ -32,7 +30,8 @@ const getDetail = () => {
         response.status === 200 && setData(response.data);
       })
       .catch(() => {
-        setError(true);
+        // setError(true);
+        console.log('Error');
       });
   };
 
