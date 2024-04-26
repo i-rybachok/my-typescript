@@ -7,6 +7,9 @@ import Loading from '../../components/Loading/Loading';
 import Error from '../../components/Error/Error';
 import Wrapper from '../../components/Wrapper/Wrapper';
 
+// * Custom hooks
+import useTitle from '../../hooks/useTitle.hook';
+
 // * Styles
 import styles from './List.module.css';
 
@@ -17,6 +20,8 @@ type TProps = {
 };
 
 const List = () => {
+  useTitle({ title: 'List' });
+
   const [state, setState] = useState({ list: [], error: '', loading: true });
   const commonId = useId(); // Create a unique id
 

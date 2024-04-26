@@ -5,12 +5,18 @@ import { useState } from 'react';
 import Button from '../../components/Button/Button';
 import img from '../../components/assets/Image.png';
 import Wrapper from '../../components/Wrapper/Wrapper';
+import { EButton } from '../../components/types/Button.types';
+
+// * Custom hooks
+import useTitle from '../../hooks/useTitle.hook';
 
 // * Styles
 import styles from './Main.module.css';
-import { EButton } from '../../components/types/Button.types';
 
 const Banner = () => {
+  // Without additional titles
+  useTitle({ title: '' });
+
   const [count, setCount] = useState<number>(0); // "useState(0)" is an example of a hook; in [number, setNumber] "number" is a state variable and "setNumber" is the setter function
 
   return (

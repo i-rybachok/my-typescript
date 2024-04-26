@@ -41,7 +41,7 @@ const Form = () => {
     return errors;
   };
 
-  // ! useFormik for ...
+  // * useFormik
   const formik = useFormik({
     // Pass initialValues
     initialValues: INITIAL_VALUES,
