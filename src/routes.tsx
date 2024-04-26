@@ -7,7 +7,9 @@ import App from './App';
 import Loading from './components/Loading/Loading';
 
 const Main = lazy(() => import('./pages/Main/Main'));
-const List = lazy(() => import('./pages/List/List'));
+const Lists = lazy(() => import('./pages/ListPosts/Lists'));
+const ListPosts = lazy(() => import('./pages/ListPosts/ListPosts/ListPosts'));
+const Detail = lazy(() => import('./pages/ListPosts/Detail/Detail'));
 const SignUp = lazy(() => import('./pages/SignUp/SignUp'));
 const Error = lazy(() => import('./components/Error/Error'));
 
@@ -26,7 +28,17 @@ const routes = createBrowserRouter([
       },
       {
         path: '/list',
-        element: <Element page={<List />} />,
+        element: <Element page={<Lists />} />,
+        children: [
+          {
+            path: '',
+            element: <Element page={<ListPosts />} />,
+          },
+          {
+            path: ':id',
+            element: <Element page={<Detail />} />,
+          },
+        ],
       },
       {
         path: '/signup',

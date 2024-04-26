@@ -1,11 +1,12 @@
 // * Base
 import axios from 'axios';
 import { useEffect, useId, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // * Components
-import Loading from '../../components/Loading/Loading';
-import Error from '../../components/Error/Error';
-import Wrapper from '../../components/Wrapper/Wrapper';
+import Loading from '../Loading/Loading';
+import Error from '../Error/Error';
+import Wrapper from '../Wrapper/Wrapper';
 
 // * Custom hooks
 import useTitle from '../../hooks/useTitle.hook';
@@ -15,9 +16,12 @@ import styles from './List.module.css';
 
 // * Local types
 type TProps = {
+  id: string; // бо він може бути не тільки числом
   title: string;
   body: string;
 };
+
+const URL: string = 'https://jsonplaceholder.typicode.com/posts';
 
 const List = () => {
   useTitle({ title: 'List' });
@@ -27,11 +31,12 @@ const List = () => {
 
   const getList = () => {
     axios
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .then(({ data }) => {
+      .get(URL)
+      .then((response) => {
+        // console.log(response);
         setState((prevState) => ({
           ...prevState,
-          list: data,
+          list: response.data,
         }));
       })
       .catch(() => {
@@ -68,17 +73,24 @@ const List = () => {
     <Wrapper>
       <ul className={styles.list}>
         {state.list.map(({ id, title, body }) => (
-          <Item key={`list-item-${id}-${commonId}`} title={title} body={body} />
+          <Item
+            key={`list-item-${id}-${commonId}`}
+            id={id}
+            title={title}
+            body={body}
+          />
         ))}
       </ul>
     </Wrapper>
   );
 };
 
-const Item: React.FC<TProps> = ({ title, body }) => {
+const Item: React.FC<TProps> = ({ id, title, body }) => {
   return (
     <li>
-      <h3>{title}</h3>
+      <Link to={`/list/${id}`} className='font-bold'>
+        {title}
+      </Link>
       <p>{body}</p>
     </li>
   );
