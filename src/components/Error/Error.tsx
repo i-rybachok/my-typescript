@@ -6,14 +6,14 @@ import { EButton } from '../types/Button.types';
 
 // * Local types
 type TProps = {
-  error: string;
+  text: string;
   onClick?: () => any;
 };
 
-const Error: React.FC<TProps> = ({ error, onClick }) => {
+const Error: React.FC<TProps> = ({ text, onClick }) => {
   return (
     <>
-      <p>{error}</p>
+      <p>{text}</p>
       <Button
         type={EButton.BUTTON}
         text='Retry'

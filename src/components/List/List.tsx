@@ -57,7 +57,7 @@ const List = () => {
   }
 
   if (state.error) {
-    return <Error error={state.error} onClick={getList} />;
+    return <Error text={state.error} onClick={getList} />;
   }
 
   if (!state.list.length) {

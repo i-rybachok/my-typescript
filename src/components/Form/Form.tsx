@@ -1,5 +1,6 @@
 // * Base
 import { FormikValues, useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 // * Components
 import Input from '../Input/Input';
@@ -18,23 +19,27 @@ const EMAIL_REG_EXP: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PASSWORD_MIN_LENGTH: number = 8;
 
 const Form = () => {
+  const { t } = useTranslation();
+
   // Check all inputs (validate them)
   const validate = ({ username, email, password }: Readonly<TValues>) => {
     const errors: Partial<TValues> = {};
 
     if (!username) {
-      errors.username = 'Required';
+      errors.username = t('required');
     }
 
     if (!email) {
-      errors.email = 'Required';
+      errors.email = t('required');
     } else if (!EMAIL_REG_EXP.test(email)) {
-      errors.email = 'Invalid email address';
+      errors.email = t('invalid email');
     }
 
     if (!password) {
-      errors.password = 'Required';
+      errors.password = t('required');
     } else if (password.length < PASSWORD_MIN_LENGTH) {
+      // !!! Як тут змінити на t() ?
+      // errors.password = t(`invalid password ${PASSWORD_MIN_LENGTH}`);
       errors.password = `Password should be at least ${PASSWORD_MIN_LENGTH} characters`;
     }
 
@@ -60,7 +65,7 @@ const Form = () => {
   return (
     <form onSubmit={formik.handleSubmit} className='max-w-sm mx-auto'>
       <Input
-        title='Username'
+        title={t('username')}
         type='username'
         name='username'
         onChange={formik.handleChange}
@@ -75,7 +80,7 @@ const Form = () => {
       />
 
       <Input
-        title='Email'
+        title={t('email')}
         type='email'
         name='email'
         onChange={formik.handleChange}
@@ -88,7 +93,7 @@ const Form = () => {
       />
 
       <Input
-        title='Password'
+        title={t('password')}
         type='password'
         name='password'
         onChange={formik.handleChange}
@@ -104,7 +109,7 @@ const Form = () => {
 
       <Button
         type={EButton.SUBMIT}
-        text='Submit'
+        text={t('submit')}
         disabled={formik.isSubmitting}
         orangeMode
       />

@@ -1,15 +1,13 @@
 // * Base
 import { Outlet } from 'react-router-dom';
+import { memo } from 'react';
 
-// * Custom hooks
-import useTitle from '../../hooks/useTitle.hook';
-
-const Lists = () => {
+const Lists = memo(() => {
   return (
     <>
       <Outlet />
     </>
   );
-};
+});
 
 export default Lists;

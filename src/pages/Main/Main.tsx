@@ -1,5 +1,6 @@
 // * Base
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // * Components
 import Button from '../../components/Button/Button';
@@ -17,20 +18,19 @@ const Banner = () => {
   // Without additional titles
   useTitle({ title: '' });
 
+  const { t } = useTranslation();
+
   const [count, setCount] = useState<number>(0); // "useState(0)" is an example of a hook; in [number, setNumber] "number" is a state variable and "setNumber" is the setter function
 
   return (
     <Wrapper>
       <div className={styles.wrapper}>
         <section className={styles.banner}>
-          <h1 className={styles.title}>The Design Thinking superpowers</h1>
-          <p className={styles.text}>
-            Tools, tutorials, design and innovation experts, all in one place!
-            The most intuitive way to imagine your next user experience.
-          </p>
+          <h1 className={styles.title}>{t('design')}</h1>
+          <p className={styles.text}>{t('describtion')}</p>
           <Button
             type={EButton.BUTTON}
-            text='Add 1 to a number'
+            text={t('addition')}
             onClick={() => setCount((prev) => prev + 1)}
             bigMode={true}
           />

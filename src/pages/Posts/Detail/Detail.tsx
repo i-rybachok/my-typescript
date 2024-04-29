@@ -2,6 +2,7 @@
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // * Components
 import Wrapper from '../../../components/Wrapper/Wrapper';
@@ -20,7 +21,10 @@ const getDetail = () => {
   const [data, setData] = useState<TData | null>(null);
   const [error, setError] = useState(false);
   const { id } = useParams();
-  useTitle({ title: data?.title || 'Loading' });
+
+  useTitle({ title: error ? 'Error' : !data ? 'Loading' : data.title });
+
+  const { t } = useTranslation();
 
   const getListDetail = () => {
     axios
@@ -30,8 +34,7 @@ const getDetail = () => {
         response.status === 200 && setData(response.data);
       })
       .catch(() => {
-        // setError(true);
-        console.log('Error');
+        setError(true);
       });
   };
 
@@ -39,14 +42,18 @@ const getDetail = () => {
     getListDetail();
   }, []);
 
-  if (error) return <Error error='Error' />;
+  if (error) return <Error text='Error' />;
   if (!data) return <Loading />;
 
   return (
     <Wrapper>
       <p>Id: {id}</p>
-      <p>Title: {data ? data.title : 'No title'}</p>
-      <p>Details: {data ? data.body : 'No additional information'}</p>
+      <p>
+        {t('title')}: {data ? data.title : t('no title')}
+      </p>
+      <p>
+        {t('details')}: {data ? data.body : t('no details')}
+      </p>
     </Wrapper>
   );
 };
