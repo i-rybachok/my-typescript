@@ -1,13 +1,13 @@
 {
   "main": "Main",
   "list": "List",
-  "sign in": "Sign In",
-  "sign up": "Sign Up",
+  "sign-in": "Sign In",
+  "sign-up": "Sign Up",
   "username": "Username",
   "email": "Email",
-  "invalid email": "Invalid email address",
+  "email.invalid": "Invalid email address",
   "password": "Password",
-  "invalid password": "Password should be at least ${PASSWORD_MIN_LENGTH} characters",
+  "password.invalid": "Password should be at least {{length}} characters",
   "submit": "Submit",
   "loading": "Loading",
   "required": "Required",
@@ -17,7 +17,7 @@
   "addition": "Add 1 to a number",
   "post": "Posts",
   "title": "Title",
-  "no title": "No title",
+  "title.empty": "No title",
   "details": "Details",
-  "no details": "No additional information"
+  "details.empty": "No additional information"
 }

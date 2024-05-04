@@ -1,6 +1,7 @@
 // * Base
 // import className from 'classnames'
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 // * Styles
 import styles from './Button.module.css';
@@ -28,6 +29,8 @@ const Button: React.FC<TProps> = ({
   bigMode,
   orangeMode,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <button
       type={type}
@@ -40,7 +43,7 @@ const Button: React.FC<TProps> = ({
         orangeMode && styles.orange
       )}
     >
-      <span>{text}</span>
+      <span>{t(text)}</span>
     </button>
   );
 };

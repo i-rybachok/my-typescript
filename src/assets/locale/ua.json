@@ -1,13 +1,13 @@
 {
   "main": "Головна",
   "list": "Список",
-  "sign in": "Увійти",
-  "sign up": "Зареєструватися",
+  "sign-in": "Увійти",
+  "sign-up": "Зареєструватися",
   "username": "Ім'я користувача",
   "email": "Електронна пошта",
-  "invalid email": "Неправильна адреса електронної пошти",
+  "email.invalid": "Неправильна адреса електронної пошти",
   "password": "Пароль",
-  "invalid password": "Password should be at least ${PASSWORD_MIN_LENGTH} characters",
+  "password.invalid": "Пароль повинен містити щонайменше {{length}} символів",
   "submit": "Відправити",
   "loading": "Завантаження",
   "required": "Обов'язково",
@@ -17,7 +17,7 @@
   "addition": "Додай 1 до числа",
   "post": "Пости",
   "title": "Назва",
-  "no title": "Немає назви",
+  "title.empty": "Немає назви",
   "details": "Деталі",
-  "no details": "Немає деталей"
+  "details.empty": "Немає деталей"
 }

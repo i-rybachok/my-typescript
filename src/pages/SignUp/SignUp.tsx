@@ -15,7 +15,7 @@ const SignUp = () => {
   return (
     <>
       <h1 className='text-center text-2xl font-bold text-orange-500 mb-5'>
-        {t('sign up')}
+        {t('sign-up')}
       </h1>
       <Form />
     </>

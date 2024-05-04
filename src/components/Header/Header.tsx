@@ -1,7 +1,6 @@
 // * Base
 import { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 // * Components
 import Wrapper from '../Wrapper/Wrapper';
@@ -18,8 +17,6 @@ const Header = memo(() => {
   const signIn = useCallback(() => console.log('You signed in'), []);
   const signUp = useCallback(() => console.log('You signed up'), []);
 
-  const { t } = useTranslation();
-
   return (
     <header className={styles.header}>
       <Wrapper className={[styles.wrapper]}>
@@ -31,11 +28,11 @@ const Header = memo(() => {
         <div className={styles.buttons}>
           <Button
             type={EButton.BUTTON}
-            text={t('sign in')}
+            text='sign-in'
             onClick={signIn}
             whiteMode={true}
           />
-          <Button type={EButton.BUTTON} text={t('sign up')} onClick={signUp} />
+          <Button type={EButton.BUTTON} text='sign-up' onClick={signUp} />
         </div>
         <div>
           <Language />

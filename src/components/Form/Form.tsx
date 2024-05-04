@@ -3,7 +3,7 @@ import { FormikValues, useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 
 // * Components
-import Input from '../Input/Input';
+import Input, { TError } from '../Input/Input';
 import Button from '../Button/Button';
 import { EButton } from '../types/Button.types';
 
@@ -12,6 +12,12 @@ type TValues = {
   username: string;
   email: string;
   password: string;
+};
+
+type TErrors = {
+  username?: TError;
+  email?: TError;
+  password?: TError;
 };
 
 const INITIAL_VALUES: TValues = { username: '', email: '', password: '' };
@@ -23,24 +29,25 @@ const Form = () => {
 
   // Check all inputs (validate them)
   const validate = ({ username, email, password }: Readonly<TValues>) => {
-    const errors: Partial<TValues> = {};
+    const errors: TErrors = {};
 
     if (!username) {
-      errors.username = t('required');
+      errors.username = { key: 'required' };
     }
 
     if (!email) {
-      errors.email = t('required');
+      errors.email = { key: 'required' };
     } else if (!EMAIL_REG_EXP.test(email)) {
-      errors.email = t('invalid email');
+      errors.email = { key: 'invalid email' };
     }
 
     if (!password) {
-      errors.password = t('required');
+      errors.password = { key: 'required' };
     } else if (password.length < PASSWORD_MIN_LENGTH) {
-      // !!! Як тут змінити на t() ?
-      // errors.password = t(`invalid password ${PASSWORD_MIN_LENGTH}`);
-      errors.password = `Password should be at least ${PASSWORD_MIN_LENGTH} characters`;
+      errors.password = {
+        key: 'password.invalid',
+        config: { length: PASSWORD_MIN_LENGTH },
+      };
     }
 
     return errors;
@@ -73,9 +80,9 @@ const Form = () => {
         value={formik.values.username}
         placeholder='Username'
         error={
-          formik.errors.username &&
-          formik.touched.username &&
-          formik.errors.username
+          (formik.errors.username &&
+            formik.touched.username &&
+            formik.errors.username) as unknown as TError
         }
       />
 
@@ -88,7 +95,9 @@ const Form = () => {
         value={formik.values.email}
         placeholder='Email'
         error={
-          formik.errors.email && formik.touched.email && formik.errors.email
+          (formik.errors.email &&
+            formik.touched.email &&
+            formik.errors.email) as unknown as TError
         }
       />
 
@@ -101,9 +110,9 @@ const Form = () => {
         value={formik.values.password}
         placeholder='Password'
         error={
-          formik.errors.password &&
-          formik.touched.password &&
-          formik.errors.password
+          (formik.errors.password &&
+            formik.touched.password &&
+            formik.errors.password) as unknown as TError
         }
       />
 

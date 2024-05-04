@@ -4,14 +4,15 @@ import LIST from './Navigation.data';
 // * Base
 import { Link, useLocation } from 'react-router-dom';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 // * Styles
 import styles from './Navigation.module.css';
 
 // * Local types
 type TProps = {
-  href: string;
-  text: string;
+  to: string;
+  title: string;
   pathname: string;
 };
 
@@ -21,11 +22,11 @@ const Navigation = () => {
   return (
     <nav>
       <ul className={styles.list}>
-        {LIST.map(({ id, href, text }) => (
+        {LIST.map(({ id, to, title }) => (
           <Item
             key={`navigation-item-${id}`}
-            href={href}
-            text={text}
+            to={to}
+            title={title}
             pathname={pathname}
           />
         ))}
@@ -34,18 +35,19 @@ const Navigation = () => {
   );
 };
 
-const Item: React.FC<TProps> = ({ href, text, pathname }) => {
+const Item: React.FC<TProps> = ({ to, title, pathname }) => {
+  const { t } = useTranslation();
   return (
     <li>
       <Link
-        to={href}
+        to={to}
         className={cn(
           styles.link,
           'hover:text-orange-500',
-          pathname === href ? 'text-orange-500' : ''
+          pathname === to ? 'text-orange-500' : ''
         )}
       >
-        {text}
+        {t(title)}
       </Link>
       {/* <Link> is better than <a> */}
     </li>

@@ -1,4 +1,5 @@
-import { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // * Styles
 import styles from './Input.module.css';
@@ -12,7 +13,12 @@ type TProps = {
   onBlur: (e: ChangeEvent<any>) => void;
   value: string;
   placeholder: string;
-  error: ReactNode;
+  error?: TError | null;
+};
+
+export type TError = {
+  key: string;
+  config?: { [key: string]: string | number };
 };
 
 const FormInput: React.FC<TProps> = ({
@@ -25,9 +31,12 @@ const FormInput: React.FC<TProps> = ({
   placeholder,
   error,
 }) => {
+  const { t } = useTranslation();
+  console.log(error);
+
   return (
-    <label>
-      <div>{title}</div>
+    <label className='block'>
+      <div>{t(title)}</div>
       <input
         type={type}
         name={name}
@@ -37,7 +46,7 @@ const FormInput: React.FC<TProps> = ({
         placeholder={placeholder}
         className={styles.field}
       />
-      <div className={styles.error}>{error}</div>
+      <div className={styles.error}>{error && t(error.key, error.config)}</div>
     </label>
   );
 };
